@@ -37,12 +37,11 @@ func (m *documentMarshaler) UnmarshalSmithyDocument(v interface{}) error {
 	jDecoder := json.NewDecoder(bytes.NewReader(mBytes))
 	jDecoder.UseNumber()
 
-	var jv interface{}
 	if err := jDecoder.Decode(&v); err != nil {
 		return err
 	}
 
-	return NewDocumentUnmarshaler(v).UnmarshalSmithyDocument(&jv)
+	return NewDocumentUnmarshaler(v).UnmarshalSmithyDocument(&v)
 }
 
 func (m *documentMarshaler) MarshalSmithyDocument() ([]byte, error) {
